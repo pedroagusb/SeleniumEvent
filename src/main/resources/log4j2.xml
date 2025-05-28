@@ -2,7 +2,7 @@
 <Configuration status="WARN">
     <Properties>
         <!-- Logs directory based on date -->
-        <Property name="LOG_DIR">target/logs/run-${date:yyyy-MM-dd_HH-mm}</Property>
+        <Property name="LOG_DIR">logs/run-${date:yyyy-MM-dd_HH-mm}</Property>
     </Properties>
 
     <Appenders>
@@ -24,15 +24,15 @@
     </Appenders>
 
     <Loggers>
-        <!-- Reducir verbosidad de Selenium y otras bibliotecas -->
+        <!-- Reduce Selenium Verbosity and other libraries -->
         <Logger name="org.openqa.selenium" level="WARN" additivity="false">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="File"/>
             <AppenderRef ref="ErrorsOnly"/>
         </Logger>
 
-        <!-- Logger para tu framework de pruebas - ajusta el paquete base -->
-        <Logger name="tu.paquete.base" level="DEBUG" additivity="false">
+        <!-- Test framework logger -->
+        <Logger name="org.seleniumEvent" level="DEBUG" additivity="false">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="File"/>
             <AppenderRef ref="ErrorsOnly"/>

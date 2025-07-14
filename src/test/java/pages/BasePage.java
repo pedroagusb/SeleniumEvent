@@ -154,4 +154,10 @@ public abstract class BasePage implements Logging {
             return "URL not available";
         }
     }
+
+    protected void removeTargetBlank (WebElement element){
+        log().debug("Removing target='_blank' attribute from element");
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].removeAttribute('target')", element);
+    }
 }

@@ -1,9 +1,6 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.InvalidArgumentException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.slf4j.Logger;
@@ -25,10 +22,13 @@ public class SearchResultsPage extends BasePage {
 
     // ========== MAIN RESULTS ELEMENTS ==========
 
-    @FindBy(css = ".search-results-container, .events-list, [data-testid='search-results']")
+    @FindBy(css = ".search-results-panel-content__events")
     private WebElement resultsContainer;
 
-    @FindBy(css = "[data-testid='search-event']")
+    //@FindBy(css = "[data-testid='search-event'] a.event-card-link")
+    //private List<WebElement> eventCards;
+
+    @FindBy(xpath = "//div[@data-testid='search-event']//section[1]/a")
     private List<WebElement> eventCards;
 
     @FindBy(className = "empty-state__body")
@@ -79,7 +79,6 @@ public class SearchResultsPage extends BasePage {
 
     /**
      * Verifies that search results are displayed (not an empty results page)
-     * Should check that we have actual events showing, not a "no results" message
      *
      * @return this same instance to allow method chaining
      */
@@ -139,6 +138,8 @@ public class SearchResultsPage extends BasePage {
         }
 
         WebElement firstEvent = eventCards.get(0);
+        removeTargetBlank(firstEvent);
+
         waitFor(firstEvent).toBeClickable().withTimeout(5);
         firstEvent.click();
 
@@ -164,6 +165,8 @@ public class SearchResultsPage extends BasePage {
             }
 
             WebElement eventElement = eventCards.get(eventIndex);
+            removeTargetBlank(eventElement);
+
             waitFor(eventElement).toBeClickable().withTimeout(5);
             eventElement.click();
 

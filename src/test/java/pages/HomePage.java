@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,13 +21,13 @@ public class HomePage extends BasePage {
 
     // ========== HEADER NAVIGATION ELEMENTS ========== //
 
-    @FindBy(css = "[data-testid='header-logo'], .logo, .eventbrite-logo")
+    @FindBy(css = "[data-heap-id='seo-global-nav-logo-desktop-click']")
     private WebElement eventbriteLogo;
 
     @FindBy(css = "input[placeholder*='Search events'], input[placeholder*='Buscar eventos']")
     private WebElement searchEventsField;
 
-    @FindBy(css = "button[data-testid='search-button'], button[type='submit']")
+    @FindBy(css = "button.searchButton, button[type='button']")
     private WebElement searchButton;
 
     @FindBy(linkText = "Log In")
@@ -69,7 +70,7 @@ public class HomePage extends BasePage {
 
     // ========== ADDITIONAL CONTENT ELEMENTS ==========
 
-    @FindBy(css = ".categories-section, .event-categories")
+    @FindBy(css = "[data-testid='icon-category-browse'], .iconCategoryBrowse")
     private WebElement categoriesSection;
 
     @FindBy(css = ".featured-events, .popular-events")
@@ -142,10 +143,7 @@ public class HomePage extends BasePage {
         searchEventsField.click();
 
         log().debug("Typing search term: {}", searchTerm);
-        searchEventsField.sendKeys(searchTerm);
-
-        waitFor(searchButton).toBeClickable().withTimeout(5);
-        searchButton.click();
+        searchEventsField.sendKeys(searchTerm + Keys.ENTER);
 
         log().info("Search initiated successfully for term: {}", searchTerm);
         return new SearchResultsPage(getDriver());

@@ -2,6 +2,8 @@ package driver;
 
 import logging.Logging;
 import org.openqa.selenium.WebDriver;
+
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public abstract class DriverManager implements Logging {
@@ -25,7 +27,7 @@ public abstract class DriverManager implements Logging {
         if (null == drivers.get()) {
             drivers.set(this.createDriver());
         }
-        drivers.get().manage().timeouts().implicitlyWait(1L, TimeUnit.SECONDS);
+        drivers.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
 
         return drivers.get();
     }

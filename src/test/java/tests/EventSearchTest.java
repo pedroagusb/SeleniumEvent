@@ -18,6 +18,7 @@ public class EventSearchTest extends BaseTest {
                 verifyEventDetailPageDisplayed().
                 getEventSummary();
 
-        Assert.assertNotNull(summaryEvent);
+        log().info("Event summary retrieved: {}", summaryEvent);
+        Assert.assertNotNull(summaryEvent, "Event summary should not be null");
     }
 }

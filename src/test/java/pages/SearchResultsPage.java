@@ -25,19 +25,25 @@ public class SearchResultsPage extends BasePage {
     @FindBy(css = ".search-results-panel-content__events")
     private WebElement resultsContainer;
 
-    //@FindBy(css = "[data-testid='search-event'] a.event-card-link")
-    //private List<WebElement> eventCards;
-
     @FindBy(xpath = "//div[@data-testid='search-event']//section[1]/a")
     private List<WebElement> eventCards;
 
+    @FindBy(xpath = "//div[@data-testid='search-event']//section[2]//p[text()='Free']")
+    private List<WebElement> freeEventCards;
+
     @FindBy(className = "empty-state__body")
     private WebElement noResultsMessage;
+
+    @FindBy(xpath = "//span[contains(@class,'filter-header-container__desktop')]//span[text()='Free' or text()='Gratis']")
+    private WebElement freeTextFilterApplied;
 
     // ========== SEARCH AND FILTER ELEMENTS ==========
 
     @FindBy(css = "input[placeholder*='Search'], input[placeholder*='Buscar']")
     private WebElement searchField;
+
+    @FindBy(xpath = "//input[@value='free']//following-sibling::label")
+    private WebElement freeEventFilter;
 
     // ========== PAGINATION ELEMENTS ==========
 
@@ -104,7 +110,7 @@ public class SearchResultsPage extends BasePage {
         log().debug("Checking if search returned any results");
 
         if(!eventCards.isEmpty()){
-            log().debug("Found {} event cards", eventCards.size());
+            log().debug("Found {} event cards", getResultsCount());
             return true;
         }
 
@@ -121,6 +127,22 @@ public class SearchResultsPage extends BasePage {
 
     public int getResultsCount() {
         return eventCards.size();
+    }
+
+    public boolean areAllFreeEvents (){
+        log().info("Checking if all events are Free");
+
+        if(hasResults()){
+            for(WebElement element: freeEventCards){
+                String text = element.getText();
+
+                if(!text.contains("Free")){
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     // ========== NAVIGATION METHODS ==========
@@ -176,6 +198,20 @@ public class SearchResultsPage extends BasePage {
             log.error("Index entered is invalid: {}. Error {}", eventIndex, e.getMessage());
             throw new RuntimeException();
         }
+    }
+
+    public SearchResultsPage selectFreeEvent(){
+        log.info("Clicking in Free Events filter");
+
+        scrollToElement(freeEventFilter);
+
+        waitFor(freeEventFilter).toBeClickable().withTimeout(5);
+        freeEventFilter.click();
+
+        log.info("Waiting for filter to be applied");
+        waitFor(freeTextFilterApplied).toBeVisible().withTimeout(5);
+
+        return this;
     }
 
     // ========== UTILITY METHODS ==========

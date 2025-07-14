@@ -155,6 +155,17 @@ public abstract class BasePage implements Logging {
         }
     }
 
+    protected void scrollToElement(WebElement element){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", element);
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
     protected void removeTargetBlank (WebElement element){
         log().debug("Removing target='_blank' attribute from element");
         JavascriptExecutor js = (JavascriptExecutor) driver;

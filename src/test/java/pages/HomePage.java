@@ -6,8 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.ArrayList;
-
 /**
  * HomePage for Eventbrite - Main page with navigation and search functionality
  * <p>
@@ -45,8 +43,8 @@ public class HomePage extends BasePage {
 
     // ========== MAIN CONTENT ELEMENTS ==========
 
-    @FindBy(css = ".hero-title, h1, .main-title")
-    private WebElement mainHeroTitle;
+    @FindBy(css = "[data-testid='icon-category-browse']")
+    private WebElement mainEventbriteCategories;
 
     @FindBy(css = "[data-testid='category-music'], [href*='music'], .music-category")
     private WebElement musicCategory;
@@ -105,7 +103,7 @@ public class HomePage extends BasePage {
         // Verify specific main page elements
         waitFor(eventbriteLogo).toBeVisible().withTimeout(10);
         waitFor(searchEventsField).toBeVisible().withTimeout(10);
-        waitFor(mainHeroTitle).toBeVisible().withTimeout(15);
+        waitFor(mainEventbriteCategories).toBeVisible().withTimeout(15);
 
         log().info("Eventbrite main page loaded and verified successfully");
         return this;
@@ -271,7 +269,7 @@ public class HomePage extends BasePage {
      */
     public boolean isMainContentVisible() {
         try {
-            return waitFor(mainHeroTitle).toBeVisible().withTimeout(5) != null;
+            return waitFor(mainEventbriteCategories).toBeVisible().withTimeout(5) != null;
         } catch (Exception e) {
             log().debug("Main content not visible: {}", e.getMessage());
             return false;
@@ -284,8 +282,8 @@ public class HomePage extends BasePage {
      * @return String the text content of the main hero title
      */
     public String getMainHeroText() {
-        waitFor(mainHeroTitle).toBeVisible().withTimeout(10);
-        String heroText = mainHeroTitle.getText();
+        waitFor(mainEventbriteCategories).toBeVisible().withTimeout(10);
+        String heroText = mainEventbriteCategories.getText();
         log().debug("Retrieved hero text: {}", heroText);
         return heroText;
     }

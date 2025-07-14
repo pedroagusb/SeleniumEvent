@@ -28,10 +28,26 @@ public class EventSearchTest extends BaseTest {
 
         boolean areEventResults = homePage.verifyHomePageLoaded().
                 verifyNavigationElementsPresent().
-                searchForEvents("xyzzzzz123").
+                searchForEvents("xyzzzzz1234&*^&!@#!@").
+                verifySearchResultsLoaded().
                 hasResults();
 
         log().info("Events found? {}", areEventResults);
         Assert.assertFalse(areEventResults, "Event results shouldn't be present");
+    }
+
+    @Test(description = "Search for free events and verify price")
+    public void searchFreeEvents(){
+        HomePage homePage = new HomePage(getDriver());
+
+        boolean areFreeEvents = homePage.verifyHomePageLoaded().
+                verifyNavigationElementsPresent().
+                searchForEvents("").
+                verifySearchResultsLoaded().
+                selectFreeEvent().
+                areAllFreeEvents();
+
+        log().info("Are all events found free? {}", areFreeEvents);
+        Assert.assertTrue(areFreeEvents);
     }
 }

@@ -21,4 +21,17 @@ public class EventSearchTest extends BaseTest {
         log().info("Event summary retrieved: {}", summaryEvent);
         Assert.assertNotNull(summaryEvent, "Event summary should not be null");
     }
+
+    @Test(description = "Search events with no results")
+    public void searchEventWithoutResults(){
+        HomePage homePage = new HomePage(getDriver());
+
+        boolean areEventResults = homePage.verifyHomePageLoaded().
+                verifyNavigationElementsPresent().
+                searchForEvents("xyzzzzz123").
+                hasResults();
+
+        log().info("Events found? {}", areEventResults);
+        Assert.assertFalse(areEventResults, "Event results shouldn't be present");
+    }
 }

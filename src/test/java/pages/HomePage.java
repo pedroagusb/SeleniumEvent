@@ -46,16 +46,16 @@ public class HomePage extends BasePage {
     @FindBy(css = "[data-testid='icon-category-browse']")
     private WebElement mainEventbriteCategories;
 
-    @FindBy(css = "[data-testid='category-music'], [href*='music'], .music-category")
+    @FindBy(css = "[data-testid='category-card'], [href*='music']")
     private WebElement musicCategory;
 
-    @FindBy(css = "[data-testid='category-business'], [href*='business'], .business-category")
+    @FindBy(css = "[data-testid='category-card'], [href*='business']")
     private WebElement businessCategory;
 
-    @FindBy(css = "[data-testid='category-food'], [href*='food'], .food-category")
+    @FindBy(css = "[data-testid='category-card'], [href*='food']")
     private WebElement foodCategory;
 
-    @FindBy(css = "[data-testid='category-nightlife'], [href*='nightlife'], .nightlife-category")
+    @FindBy(css = "[data-testid='category-card'], [href*='nightlife']")
     private WebElement nightlifeCategory;
 
     // ========== LOCATION ELEMENTS ==========

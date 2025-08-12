@@ -50,4 +50,18 @@ public class EventSearchTest extends BaseTest {
         log().info("Are all events found free? {}", areFreeEvents);
         Assert.assertTrue(areFreeEvents);
     }
+
+    @Test(description = "Navigate through category and verify events")
+    public void navigateByCategoryTest(){
+        HomePage homePage = new HomePage(getDriver());
+
+        String categoryName = "Music";
+
+        boolean isCategorySelected = homePage.verifyHomePageLoaded().
+                verifyNavigationElementsPresent().
+                navigateToCategory(categoryName).verifyCategoryName(categoryName);
+
+        log().info("Is the Category {} selected correctly? {}", categoryName, isCategorySelected);
+        Assert.assertTrue(isCategorySelected);
+    }
 }

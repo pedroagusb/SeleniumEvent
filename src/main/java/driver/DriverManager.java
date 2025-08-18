@@ -4,7 +4,6 @@ import logging.Logging;
 import org.openqa.selenium.WebDriver;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 public abstract class DriverManager implements Logging {
     protected ThreadLocal<WebDriver> drivers = new ThreadLocal<>();

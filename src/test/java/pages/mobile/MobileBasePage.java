@@ -4,10 +4,7 @@ import logging.Logging;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import waits.builders.ElementWaitBuilder;
-import waits.builders.PageWaitBuilder;
 import waits.core.WaitManager;
-
-import java.util.function.Supplier;
 
 public abstract class MobileBasePage implements Logging {
 
@@ -24,6 +21,13 @@ public abstract class MobileBasePage implements Logging {
 
         log().info("BasePage initialized for driver: {} ",
                 driver.getClass().getSimpleName());
+    }
+
+    protected void clickNavigationElement(WebElement mobileElement){
+        waitFor(mobileElement).toBeVisible().
+                toBeClickable().withTimeout(5);
+
+        mobileElement.click();
     }
 
     protected WebDriver getDriver(){ return driver; }

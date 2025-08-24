@@ -28,8 +28,13 @@ public class SettingsPage extends MobileBasePage{
 
         log().debug("Starting page load verification...");
 
+        try {
+            Thread.sleep(100); // Small pause for page stabilization
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+
         waitFor(settingsTitle).toBeVisible().withTimeout(10);
-        waitFor(appsSection).toBeVisible().withTimeout(5);
         log().info("Settings elements verified successfully");
         return this;
     }

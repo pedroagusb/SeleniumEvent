@@ -1,4 +1,4 @@
-package pages;
+package pages.web;
 
 import logging.Logging;
 import org.openqa.selenium.JavascriptExecutor;

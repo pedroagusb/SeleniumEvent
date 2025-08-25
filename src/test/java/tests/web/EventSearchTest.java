@@ -1,8 +1,8 @@
-package tests;
+package tests.web;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.HomePage;
+import pages.web.HomePage;
 import testrunner.BaseTest;
 
 public class EventSearchTest extends BaseTest {

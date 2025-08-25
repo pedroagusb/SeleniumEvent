@@ -1,4 +1,4 @@
-package pages;
+package pages.web;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
